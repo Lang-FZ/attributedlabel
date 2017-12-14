@@ -97,6 +97,7 @@ NI_FIX_CATEGORY_BUG(NSMutableAttributedStringNimbusKitAttributedLabel)
   NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   paragraphStyle.alignment = NSTextAlignmentFromCTTextAlignment(textAlignment);
   paragraphStyle.lineBreakMode = [[self class] nimbuskit_lineBreakModeFromCTLineBreakMode:lineBreakMode];
+    paragraphStyle.paragraphSpacing = 0;
     if (lineHeight > 0) {
         paragraphStyle.minimumLineHeight = lineHeight;
         paragraphStyle.maximumLineHeight = lineHeight;

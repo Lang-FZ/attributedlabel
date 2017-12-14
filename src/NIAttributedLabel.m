@@ -267,11 +267,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     
     paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
     paragraphStyle.alignment = self.textAlignment;
-    paragraphStyle.hyphenationFactor = 1.0;
-    paragraphStyle.firstLineHeadIndent = 0.0;
-    paragraphStyle.paragraphSpacingBefore = 0.0;
-    paragraphStyle.headIndent = 0;
-    paragraphStyle.tailIndent = 0;
+    paragraphStyle.paragraphSpacing = 0;
     if (_lineHeight > 0) {
         paragraphStyle.minimumLineHeight = _lineHeight;
         paragraphStyle.maximumLineHeight = _lineHeight;
