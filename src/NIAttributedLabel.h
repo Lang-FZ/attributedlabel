@@ -88,6 +88,7 @@ extern NSString* const NIAttributedLabelLinkAttributeName; // Value is an NSText
 @property (nonatomic)         CGFloat                   strokeWidth;
 @property (nonatomic, strong) UIColor*                  strokeColor;
 @property (nonatomic)         CGFloat                   textKern;
+@property (nonatomic)         CGFloat                   line_spacing;
 
 @property (nonatomic, copy) NSString* tailTruncationString;
 

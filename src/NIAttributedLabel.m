@@ -272,8 +272,12 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     paragraphStyle.paragraphSpacingBefore = 0.0;
     paragraphStyle.headIndent = 0;
     paragraphStyle.tailIndent = 0;
-    paragraphStyle.minimumLineHeight = _lineHeight;
-    paragraphStyle.maximumLineHeight = _lineHeight;
+    if (_lineHeight > 0) {
+        paragraphStyle.minimumLineHeight = _lineHeight;
+        paragraphStyle.maximumLineHeight = _lineHeight;
+    } else {
+        paragraphStyle.lineSpacing = _line_spacing;
+    }
     
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.text length])];
     
@@ -347,7 +351,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     if (nil != self.mutableAttributedString) {
         CTTextAlignment alignment = [self.class alignmentFromUITextAlignment:textAlignment];
         CTLineBreakMode lineBreak = [self.class lineBreakModeFromUILineBreakMode:self.lineBreakMode];
-        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight];
+        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight lineSpacing:_line_spacing];
     }
 }
 
@@ -357,7 +361,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     if (nil != self.mutableAttributedString) {
         CTTextAlignment alignment = [self.class alignmentFromUITextAlignment:self.textAlignment];
         CTLineBreakMode lineBreak = [self.class lineBreakModeFromUILineBreakMode:lineBreakMode];
-        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight];
+        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight lineSpacing:_line_spacing];
     }
 }
 
@@ -488,7 +492,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     if (nil != self.mutableAttributedString) {
         CTTextAlignment alignment = [self.class alignmentFromUITextAlignment:self.textAlignment];
         CTLineBreakMode lineBreak = [self.class lineBreakModeFromUILineBreakMode:self.lineBreakMode];
-        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight];
+        [self.mutableAttributedString nimbuskit_setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight lineSpacing:_line_spacing];
         
         [self attributedTextDidChange];
     }
@@ -1589,10 +1593,12 @@ CGFloat NIImageDelegateGetWidthCallback(void* refCon) {
         CTLineBreakMode lineBreak = [self.class lineBreakModeFromUILineBreakMode:label.lineBreakMode];
         
         CGFloat lineHeight = 0;
+        CGFloat lineSpacing = 0;
         if ([label isKindOfClass:[NIAttributedLabel class]]) {
             lineHeight = [(NIAttributedLabel *)label lineHeight];
+            lineSpacing = [(NIAttributedLabel *)label line_spacing];
         }
-        [attributedString nimbuskit_setTextAlignment:textAlignment lineBreakMode:lineBreak lineHeight:lineHeight];
+        [attributedString nimbuskit_setTextAlignment:textAlignment lineBreakMode:lineBreak lineHeight:lineHeight lineSpacing:lineSpacing];
     }
     
     return attributedString;

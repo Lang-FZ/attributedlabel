@@ -42,11 +42,11 @@ NI_FIX_CATEGORY_BUG(NSMutableAttributedStringNimbusKitAttributedLabel)
   [self nimbuskit_setFont:font range:self.nimbuskit_rangeOfEntireString];
 }
 
-- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight {
+- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight lineSpacing:(CGFloat)lineSpacing {
   [self nimbuskit_setTextAlignment:textAlignment
                      lineBreakMode:lineBreakMode
                         lineHeight:lineHeight
-                             range:self.nimbuskit_rangeOfEntireString];
+                             range:self.nimbuskit_rangeOfEntireString lineSpacing:lineSpacing];
 }
 
 - (void)nimbuskit_setTextColor:(UIColor *)color {
@@ -92,12 +92,17 @@ NI_FIX_CATEGORY_BUG(NSMutableAttributedStringNimbusKitAttributedLabel)
 - (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment
                      lineBreakMode:(CTLineBreakMode)lineBreakMode
                         lineHeight:(CGFloat)lineHeight
-                             range:(NSRange)range {
+                             range:(NSRange)range
+                       lineSpacing:(CGFloat)lineSpacing {
   NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   paragraphStyle.alignment = NSTextAlignmentFromCTTextAlignment(textAlignment);
   paragraphStyle.lineBreakMode = [[self class] nimbuskit_lineBreakModeFromCTLineBreakMode:lineBreakMode];
-  paragraphStyle.minimumLineHeight = lineHeight;
-  paragraphStyle.maximumLineHeight = lineHeight;
+    if (lineHeight > 0) {
+        paragraphStyle.minimumLineHeight = lineHeight;
+        paragraphStyle.maximumLineHeight = lineHeight;
+    } else {
+        paragraphStyle.lineSpacing = lineSpacing;
+    }
   [self addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
 }
 

@@ -23,7 +23,7 @@
 @interface NSMutableAttributedString (NimbusKitAttributedLabel)
 
 - (void)nimbuskit_setFont:(UIFont *)font;
-- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight;
+- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight lineSpacing:(CGFloat)lineSpacing;
 - (void)nimbuskit_setTextColor:(UIColor *)color;
 - (void)nimbuskit_setBackgroundColor:(UIColor *)color;
 - (void)nimbuskit_setLigaturesEnabled:(BOOL)enabled;
@@ -34,7 +34,7 @@
 - (void)nimbuskit_setLetterpressEnabled:(BOOL)enabled;
 
 - (void)nimbuskit_setFont:(UIFont *)font range:(NSRange)range;
-- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight range:(NSRange)range;
+- (void)nimbuskit_setTextAlignment:(CTTextAlignment)textAlignment lineBreakMode:(CTLineBreakMode)lineBreakMode lineHeight:(CGFloat)lineHeight range:(NSRange)range lineSpacing:(CGFloat)lineSpacing;
 - (void)nimbuskit_setTextColor:(UIColor *)color range:(NSRange)range;
 - (void)nimbuskit_setBackgroundColor:(UIColor *)color range:(NSRange)range;
 - (void)nimbuskit_setLigaturesEnabled:(BOOL)enabled range:(NSRange)range;
